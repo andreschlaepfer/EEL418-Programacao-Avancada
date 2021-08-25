@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  username: {
+const restaurantSchema = new Schema({
+  name: {
     type: String,
     require: true,
     unique: true,
@@ -14,8 +14,6 @@ const userSchema = new Schema({
   timestamps: true,
 });
 
-const User = mongoose.model('User', userSchema);
+const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
-module.exports = User;
-
-
+module.exports = Restaurant;
