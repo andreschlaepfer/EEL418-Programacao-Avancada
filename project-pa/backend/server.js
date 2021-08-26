@@ -1,32 +1,25 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import express from 'express'
+import cors from 'cors'
+import mongoose from 'mongoose'
 
-require('dotenv').config();
+
+import itemsRouter from './api/items.route.js'
+import restaurantsRouter from './api/restaurants.route.js'
+import usersRouter from './api/users.route.js'
 
 const app = express();
-const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {  useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection estabilished successfully");
-})
-
-const itemsRouter = require('./routes/items');
-const restaurantsRouter = require('./routes/restaurants');
-const usersRouter = require('./routes/users');
 
 
-app.use('/items', itemsRouter);
-app.use('/restaurants', restaurantsRouter);
-app.use('/users', usersRouter);
+app.use('/api/v1/items', itemsRouter);
+app.use('/api/v1/restaurants', restaurantsRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('*', (req, res) => res.status(404).json({error: "Not found"}))
 
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-})
+
+
+export default app;

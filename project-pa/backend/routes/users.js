@@ -8,13 +8,15 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((res, req) => {
-  const username = req.body.username;
+  //const username = String(req.body.username);
+  //const cellnumber = Number(req.body.cellnumber);
 
-  const newUser = new User({username});
+  //const newUser = new User({username});
 
-  newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+  // newUser.save()
+  //   .then(() => res.json('User added!'))
+  //   .catch(err => res.status(400).json('Error: ' + err));
+  res.send('POST request to homepage');
 });
 
 module.exports = router;
