@@ -12,7 +12,7 @@ const userSchema = new Schema({
   },
   cellnumber:{
     type: Number,
-    require: false,
+    require: true,
     unique:  true
   }
 

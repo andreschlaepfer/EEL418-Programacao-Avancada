@@ -1,6 +1,7 @@
 import app from './server.js'
 import mongodb from 'mongodb'
 import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 dotenv.config()
 
 const MongoClient = mongodb.MongoClient
@@ -25,3 +26,14 @@ MongoClient.connect(
       console.log(`Server is blabla running on port ${port}`)
     })
   })
+
+  mongoose.connect(
+    process.env.ATLAS_URI,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    function (err, res) {
+        try {
+            console.log('Connected to Database');
+        } catch (err) {
+            throw err;
+        }
+    })
