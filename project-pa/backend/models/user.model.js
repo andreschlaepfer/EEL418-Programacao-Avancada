@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import Table from './table.model.js'
+import Item from './item.model.js'
 
 const Schema = mongoose.Schema;
 
@@ -14,9 +16,9 @@ const userSchema = new Schema({
     type: Number,
     require: true,
     unique:  true
-  }
-
-
+  },
+  table: { type: Schema.Types.ObjectId, ref: 'Table'},
+  items:[{type: Schema.Types.ObjectId, ref: 'Item'}]
 
 }, {
   timestamps: true,
