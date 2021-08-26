@@ -4,6 +4,15 @@ import Table from './table.model.js'
 
 const Schema = mongoose.Schema;
 
+const addressSchema = new Schema({
+  street: String,
+  number: Number,
+  city: String,
+  state: String
+})
+
+const Address = mongoose.model('Address', addressSchema)
+
 const restaurantSchema = new Schema({
   name: {
     type: String,
@@ -12,18 +21,14 @@ const restaurantSchema = new Schema({
     trim: true,
     minlength: 3
   },
-  address: {
-    street: String,
-    number: Number,
-    city: String,
-    state: String
-  },
+  address: addressSchema,
   menuItems:[{type: Schema.Types.ObjectId, ref: 'Item'}],
   tables: [{ type: Schema.Types.ObjectId, ref: 'Table' }]
 
 }, {
   timestamps: true,
 });
+
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
