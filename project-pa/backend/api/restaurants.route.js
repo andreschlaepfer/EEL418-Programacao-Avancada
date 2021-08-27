@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', getRestaurants)
 router.post('/add', createRestaurant)
-router.put('/put', updateRestaurant)
-router.delete('/del', deleteRestaurant)
+router.put('/update/:id', updateRestaurant)
+router.delete('/del/:id', deleteRestaurant)
 
 export default router

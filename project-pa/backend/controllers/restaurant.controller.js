@@ -21,10 +21,16 @@ export const createRestaurant = async (req, res) => {
   }
 }
 
-export const updateRestaurant = (req, res) => {
-  res.send('UpdateRestaurant!')
+export const updateRestaurant = async (req, res) => {
+  res.json(
+    await Restaurant.findByIdAndUpdate(req.params.id, req.body).catch(
+      (error) => res.status(400).json(error)
+      )
+      )
 }
 
-export const deleteRestaurant = (req, res) => {
-  res.send('DeleteRestaurant!')
+export const deleteRestaurant = async (req, res) => {
+  res.json(
+    await Restaurant.findByIdAndRemove(req.params.id).catch((error) => res.status(400).json(error))
+  )
 }

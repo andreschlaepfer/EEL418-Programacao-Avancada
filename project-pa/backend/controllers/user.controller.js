@@ -21,10 +21,16 @@ export const createUser = async (req, res) => {
   }
 }
 
-export const updateUser = (req, res) => {
-  res.send('UpdateUser!')
+export const updateUser = async (req, res) => {
+  res.json(
+    await User.findByIdAndUpdate(req.params.id, req.body).catch(
+      (error) => res.status(400).json(error)
+      )
+      )
 }
 
-export const deleteUsers = (req, res) => {
-  res.send('DeleteUsers!')
+export const deleteUsers = async (req, res) => {
+  res.json(
+    await User.findByIdAndRemove(req.params.id).catch((error) => res.status(400).json(error))
+  )
 }

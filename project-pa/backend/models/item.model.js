@@ -20,7 +20,8 @@ const itemSchema = new Schema({
   },
   price: {
     type: Number,
-    require: true
+    require: true,
+    default: 0
   },
   restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant'},
   costumers: [{ type: Schema.Types.ObjectId, ref: 'User'}]
