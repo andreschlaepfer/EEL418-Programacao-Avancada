@@ -17,8 +17,14 @@ const userSchema = new Schema({
     require: true,
     unique:  true
   },
-  table: { type: Schema.Types.ObjectId, ref: 'Table'},
-  items:[{type: Schema.Types.ObjectId, ref: 'Item'}]
+  table: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'Table'
+  },
+  order: { 
+    type: Schema.Types.ObjectId,
+    ref: 'Order'
+    }
 
 }, {
   timestamps: true,

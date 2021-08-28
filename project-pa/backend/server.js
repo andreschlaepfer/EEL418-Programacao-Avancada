@@ -6,6 +6,7 @@ import mongoose from 'mongoose'
 import itemsRouter from './api/items.route.js'
 import restaurantsRouter from './api/restaurants.route.js'
 import usersRouter from './api/users.route.js'
+import ordersRouter from './api/orders.route.js'
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 
 app.use('/api/v1/items', itemsRouter);
+app.use('/api/v1/orders', ordersRouter);
 app.use('/api/v1/restaurants', restaurantsRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('*', (req, res) => res.status(404).json({error: "Not found"}))

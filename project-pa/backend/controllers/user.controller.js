@@ -12,7 +12,9 @@ export const getUsers = async (req, res) => {
 export const createUser = async (req, res) => {
   const username = req.body.username
   const cellnumber = req.body.cellnumber
-  const newUser = new User({username, cellnumber})
+  const order = req.body.order 
+  const table = req.body.table
+  const newUser = new User({username, cellnumber, table, order})
   try {
     await newUser.save()
     res.status(201).json(newUser)

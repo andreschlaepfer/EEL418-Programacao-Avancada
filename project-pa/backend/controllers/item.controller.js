@@ -14,9 +14,10 @@ export const createItem = async (req, res) => {
   const name = req.body.name
   const description = req.body.description
   const price = req.body.price
-  const restaurant = req.body.restaurant
+  const restaurant = req.body.restaurant // _id
   const restaurant1 = await Restaurant.findById(restaurant)
   const newItem = new Item({name, description, price, restaurant})
+
   try {
     await newItem.save()
     await restaurant1.menuItems.push(newItem)
