@@ -1,6 +1,6 @@
 import express from 'express'
 import {getRestaurants, createRestaurant, updateRestaurant, deleteRestaurant} from '../controllers/restaurant.controller.js'
-import Restaurants from '../models/restaurant.model.js'
+//import Restaurants from '../models/restaurant.model.js'
 const router = express.Router()
 
 router.get('/', getRestaurants)

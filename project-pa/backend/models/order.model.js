@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import Restaurant from './restaurant.model.js'
-import User from './user.model.js'
+//import Restaurant from './restaurant.model.js'
+//import User from './user.model.js'
 
 const Schema = mongoose.Schema;
 
@@ -11,9 +11,10 @@ const orderSchema = new Schema({
     type: String,
     default: 'Preparando'
   },
-  items: [{ type: Schema.Types.ObjectId, ref: 'Item'}],
-  costumer: { type: Schema.Types.ObjectId, ref: 'User'}
-}, {
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item', require: true}],
+  session: { type: Schema.Types.ObjectId, ref: 'Session', require: true}
+}, 
+{
   timestamps: true,
 });
 

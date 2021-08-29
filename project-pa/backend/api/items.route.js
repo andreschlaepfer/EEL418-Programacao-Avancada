@@ -3,7 +3,7 @@ import {getItems, createItem, updateItem, deleteItem} from '../controllers/item.
 import Item from '../models/item.model.js'
 const router = express.Router()
 
-router.get('/', getItems)
+router.get('/:restaurantId', getItems)
 router.post('/add', createItem)
 router.put('/update/:id', updateItem)
 router.delete('/delele/:id', deleteItem)

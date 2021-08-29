@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import Table from './table.model.js'
-import Item from './item.model.js'
+//import Table from './table.model.js'
+//import Item from './item.model.js'
 
 const Schema = mongoose.Schema;
 
@@ -13,18 +13,11 @@ const userSchema = new Schema({
     minlength: 3
   },
   cellnumber:{
-    type: Number,
+    type: String,
     require: true,
     unique:  true
   },
-  table: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Table'
-  },
-  order: { 
-    type: Schema.Types.ObjectId,
-    ref: 'Order'
-    }
+  session: [{ type: Schema.Types.ObjectId, ref: 'Session'}]
 
 }, {
   timestamps: true,

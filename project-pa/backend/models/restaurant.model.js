@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import Item from './item.model.js'
-import Table from './table.model.js'
+//import Item from './item.model.js'
+//import Table from './table.model.js'
 
 const Schema = mongoose.Schema;
 
@@ -11,7 +11,7 @@ const addressSchema = new Schema({
   state: String
 })
 
-const Address = mongoose.model('Address', addressSchema)
+//const Address = mongoose.model('Address', addressSchema)
 
 const restaurantSchema = new Schema({
   name: {

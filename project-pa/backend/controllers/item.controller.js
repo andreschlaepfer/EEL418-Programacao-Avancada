@@ -3,12 +3,15 @@ import Restaurant from '../models/restaurant.model.js'
 
 export const getItems = async (req, res) => {
   try {
-    const allItems = await Item.find().populate('restaurant', 'name')
+    const restaurantId = req.params.restaurantId
+    const allItems = await Item.find({restaurant:restaurantId})
     res.status(200).json(allItems)
   } catch (error) {
     res.status(404).json({message: error.message})
   }
 }
+
+
 
 export const createItem = async (req, res) => {
   const name = req.body.name

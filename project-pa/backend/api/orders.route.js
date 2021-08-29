@@ -1,6 +1,6 @@
 import express from 'express'
 import {getOrders, createOrder, updateOrder, deleteOrder} from '../controllers/order.controller.js'
-import Order from '../models/order.model.js'
+//import Order from '../models/order.model.js'
 const router = express.Router()
 
 router.get('/', getOrders)

@@ -1,16 +1,16 @@
 import mongoose from 'mongoose'
-import Restaurant from './restaurant.model.js'
-import User from './user.model.js'
+//import Restaurant from './restaurant.model.js'
+//import User from './user.model.js'
 
 const Schema = mongoose.Schema;
 
 const tableSchema = new Schema({
-  name: {
+  number: {
     type: Number,
     require: true,
   },
   restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant'},
-  costumers: [{ type: Schema.Types.ObjectId, ref: 'User'}]
+  sessions: [{ type: Schema.Types.ObjectId, ref: 'Session'}]
 }, {
   timestamps: true,
 });
