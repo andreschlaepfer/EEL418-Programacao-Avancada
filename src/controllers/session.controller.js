@@ -1,6 +1,7 @@
 import Session from '../models/session.model.js'
 import Table from '../models/table.model.js'
-//import User from '../models/user.model.js'
+import User from '../models/user.model.js'
+import jwt from 'jsonwebtoken'
 
 export const getSessions = async (req, res) => {
   try {
@@ -10,18 +11,27 @@ export const getSessions = async (req, res) => {
     res.status(404).json({message: error.message})
   }
 }
-// ['items','customer']
 
 export const createSession = async (req, res) => {
-  const customer = req.body.customer //_id
-  const table = req.body.table //_id
-  const table1 = await Table.findById(table)
-  const newSession = new Session({customer, table})
+  const {username, cellnumber, table_id} = req.body
   try {
+    const table = await Table.findById(table_id)
+
+    if (!table) return res.status(404).json({error: 'Table not found'})
+
+    let user = await User.findOne({cellnumber})
+
+    if (!user) {
+      user = new User({cellnumber, username})
+    }
+
+    const newSession = new Session({user, table})
     await newSession.save()
-    table1.sessions.push(newSession)
-    table1.save()
-    res.status(201).json(newSession)
+    table.sessions.push(newSession)
+    table.save()
+    res.status(201).json({session: newSession, token: jwt.sign({ session: newSession.id }, process.env.SECRET, {
+      expiresIn: '8h',
+    })})
   } catch (error) {
     res.status(409).json({message: error.message})
   }

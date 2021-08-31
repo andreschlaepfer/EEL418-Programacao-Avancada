@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema;
 
 const sessionSchema = new Schema({
-  customer: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     require: true

@@ -14,17 +14,18 @@ export const getItems = async (req, res) => {
 
 
 export const createItem = async (req, res) => {
-  const name = req.body.name
-  const description = req.body.description
-  const price = req.body.price
-  const restaurant = req.body.restaurant // _id
-  const restaurant1 = await Restaurant.findById(restaurant)
-  const newItem = new Item({name, description, price, restaurant})
-
+  const {name, description, price, restaurant_id, image} = req.body
+  
   try {
+    const restaurant = await Restaurant.findById(restaurant_id)
+
+    if (!restaurant)
+      return res.status(404).json({error: 'Restaurant not found.'})
+
+    const newItem = new Item({name, description, price, restaurant, image})
     await newItem.save()
-    await restaurant1.menuItems.push(newItem)
-    await restaurant1.save()
+    await restaurant.menuItems.push(newItem)
+    await restaurant.save()
     res.status(201).json(newItem)
   } catch (error) {
     res.status(409).json({message: error.message})

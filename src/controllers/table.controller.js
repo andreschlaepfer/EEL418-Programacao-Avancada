@@ -4,23 +4,34 @@ import Restaurant from '../models/restaurant.model.js'
 
 export const getTables = async (req, res) => {
   try {
-    const allSessions = await Table.find()
-    res.status(200).json(allSessions)
+    const {id} = req.params;
+    let table;
+    if (id) {
+      table = await Table.findById(id)
+      if (!table) {
+        return res.status(404).json({error: 'Table not found.'})
+      }
+    }
+    else
+      table = await Table.find()
+    res.status(200).json(table)
   } catch (error) {
     res.status(404).json({message: error.message})
   }
 }
-// ['items','customer']
 
 export const createTable = async (req, res) => {
   try {
-    const number = req.body.customer //Number
-    const restaurant = req.body.restaurant //_id
-    const restaurant1 = await Restaurant.findById(restaurant)
+    const {number, restaurant_id} = req.body //Number
+    const restaurant = await Restaurant.findById(restaurant_id)
+
+    if (!restaurant)
+      return res.status(404).json({error: 'Restaurant not found.'})
+
     const newTable = new Table({number, restaurant})
     await newTable.save()
-    await restaurant1.tables.push(newTable)
-    await restaurant1.save()
+    await restaurant.tables.push(newTable)
+    await restaurant.save()
     res.status(201).json(newTable)
   } catch (error) {
     res.status(409).json({message: error.message})

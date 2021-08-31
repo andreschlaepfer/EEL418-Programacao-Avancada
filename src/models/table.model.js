@@ -8,6 +8,7 @@ const tableSchema = new Schema({
   number: {
     type: Number,
     require: true,
+    unique: true
   },
   restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant'},
   sessions: [{ type: Schema.Types.ObjectId, ref: 'Session'}]

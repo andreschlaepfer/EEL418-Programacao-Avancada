@@ -2,8 +2,13 @@ import User from '../models/user.model.js'
 
 export const getUsers = async (req, res) => {
   try {
-    const allUsers = await User.find()
-    res.status(200).json(allUsers)
+    const {cellnumber} = req.query
+
+    if (cellnumber) {
+      return res.json(await User.findOne({cellnumber}))
+    } else {
+      return res.json(await User.find())
+    }
   } catch (error) {
     res.status(404).json({message: error.message})
   }

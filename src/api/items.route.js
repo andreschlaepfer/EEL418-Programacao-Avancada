@@ -4,8 +4,8 @@ import {getItems, createItem, updateItem, deleteItem} from '../controllers/item.
 const router = express.Router()
 
 router.get('/:restaurantId', getItems)
-router.post('/add', createItem)
-router.put('/update/:id', updateItem)
-router.delete('/delele/:id', deleteItem)
+router.post('/', createItem)
+router.put('/:id', updateItem)
+router.delete('/:id', deleteItem)
 
 export default router

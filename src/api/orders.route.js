@@ -4,8 +4,8 @@ import {getOrders, createOrder, updateOrder, deleteOrder} from '../controllers/o
 const router = express.Router()
 
 router.get('/', getOrders)
-router.post('/add', createOrder)
-router.put('/update/:id', updateOrder)
-router.delete('/delele/:id', deleteOrder)
+router.post('/', createOrder)
+router.put('/:id', updateOrder)
+router.delete('/:id', deleteOrder)
 
 export default router

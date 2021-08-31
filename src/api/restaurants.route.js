@@ -4,8 +4,8 @@ import {getRestaurants, createRestaurant, updateRestaurant, deleteRestaurant} fr
 const router = express.Router()
 
 router.get('/', getRestaurants)
-router.post('/add', createRestaurant)
-router.put('/update/:id', updateRestaurant)
-router.delete('/del/:id', deleteRestaurant)
+router.post('/', createRestaurant)
+router.put('/:id', updateRestaurant)
+router.delete('/:id', deleteRestaurant)
 
 export default router

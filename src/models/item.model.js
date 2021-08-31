@@ -23,6 +23,10 @@ const itemSchema = new Schema({
     require: true,
     default: 0
   },
+  image: {
+    type: String,
+    trim: true,
+  },
   restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant'},
 }, {
   timestamps: true,

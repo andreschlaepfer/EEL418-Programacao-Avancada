@@ -4,7 +4,7 @@ import {getSessions, createSession, updateSession, deleteSession} from '../contr
 const router = express.Router()
 
 router.get('/', getSessions)
-router.post('/add', createSession)
+router.post('/', createSession)
 router.put('/:id', updateSession)
 router.delete('/:id', deleteSession)
 
