@@ -1,11 +1,16 @@
-import express from 'express'
-import {getSessions, createSession, updateSession, deleteSession} from '../controllers/session.controller.js'
+import express from "express";
+import {
+  getSessions,
+  createSession,
+  updateSession,
+  deleteSession,
+} from "../controllers/session.controller.js";
 //import Session from '../models/session.model.js'
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', getSessions)
-router.post('/', createSession)
-router.put('/:id', updateSession)
-router.delete('/:id', deleteSession)
+router.get("/", getSessions);
+router.post("/", createSession);
+router.put("/:id", updateSession);
+router.delete("/:id", deleteSession);
 
-export default router
+export default router;
