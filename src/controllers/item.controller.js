@@ -1,9 +1,19 @@
 import Item from "../models/item.model.js";
 import Restaurant from "../models/restaurant.model.js";
 
+export const getItem = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const item = await Item.findById(id);
+    res.status(200).json(item);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getItems = async (req, res) => {
   try {
-    const restaurantId = req.params.restaurantId;
+    const restaurantId = req.query.restaurantId;
     const allItems = await Item.find({ restaurant: restaurantId });
     res.status(200).json(allItems);
   } catch (error) {
