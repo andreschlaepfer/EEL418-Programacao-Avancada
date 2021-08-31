@@ -5,8 +5,11 @@ import {
   updateOrder,
   deleteOrder,
 } from "../controllers/order.controller.js";
-//import Order from '../models/order.model.js'
+import authMiddleware from "../middlewares/auth.js";
+
 const router = express.Router();
+
+router.use(authMiddleware);
 
 router.get("/", getOrders);
 router.post("/", createOrder);

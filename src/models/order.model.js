@@ -12,7 +12,12 @@ const orderSchema = new Schema(
       type: String,
       default: "Preparando",
     },
-    items: [{ type: Schema.Types.ObjectId, ref: "Item", require: true }],
+    items: [
+      {
+        item: { type: Schema.Types.ObjectId, ref: "Item", require: true },
+        quantity: { type: Number, require: true },
+      },
+    ],
     session: { type: Schema.Types.ObjectId, ref: "Session", require: true },
   },
   {

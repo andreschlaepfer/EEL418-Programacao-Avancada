@@ -4,7 +4,9 @@ import Session from "../models/session.model.js";
 
 export const getOrders = async (req, res) => {
   try {
-    const allOrders = await Order.find().populate("items", ["name", "price"]);
+    const allOrders = await Order.find({ session: req.session }).populate(
+      "items.item"
+    );
     res.status(200).json(allOrders);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -13,11 +15,10 @@ export const getOrders = async (req, res) => {
 
 export const createOrder = async (req, res) => {
   try {
-    const status = req.body.status;
-    const session = req.body.session; //_id
-    const items = req.body.items;
+    const { items } = req.body;
+    const session = req.session;
     const session1 = await Session.findById(session);
-    const newOrder = new Order({ status, session, items });
+    const newOrder = new Order({ session, items });
 
     await newOrder.save();
     await session1.orders.push(newOrder);

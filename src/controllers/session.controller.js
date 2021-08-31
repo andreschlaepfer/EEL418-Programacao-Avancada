@@ -22,7 +22,9 @@ export const createSession = async (req, res) => {
     let user = await User.findOne({ cellnumber });
 
     if (!user) {
-      user = new User({ cellnumber, username });
+      const newUser = new User({ cellnumber, username });
+      await newUser.save();
+      user = newUser;
     }
 
     const newSession = new Session({ user, table });
