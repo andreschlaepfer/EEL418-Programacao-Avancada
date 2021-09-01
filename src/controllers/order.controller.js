@@ -17,8 +17,7 @@ export const createOrder = async (req, res) => {
   try {
     const { items } = req.body;
     if (items.length < 1) {
-      res.status(500).json({ message: "You must order at least one item" });
-      return;
+      return res.status(500).json({ message: "You must order at least one item" });
     }
     const session = req.session;
     const session1 = await Session.findById(session);
