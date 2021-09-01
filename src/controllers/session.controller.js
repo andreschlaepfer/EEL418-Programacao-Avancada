@@ -27,6 +27,17 @@ export const createSession = async (req, res) => {
       user = newUser;
     }
 
+    const actualSession = await Session.findOne({ user, active: true });
+
+    if (actualSession) {
+      return res.status(200).json({
+        session: actualSession,
+        token: jwt.sign({ session: actualSession.id }, process.env.SECRET, {
+          expiresIn: "8h",
+        }),
+      });
+    }
+
     const newSession = new Session({ user, table });
     await newSession.save();
     table.sessions.push(newSession);
