@@ -1,16 +1,20 @@
 import express from "express";
 import {
-  getSessions,
+  getSession,
   createSession,
   updateSession,
   deleteSession,
 } from "../controllers/session.controller.js";
-//import Session from '../models/session.model.js'
+import authMiddleware from "../middlewares/auth.js";
+
 const router = express.Router();
 
-router.get("/", getSessions);
 router.post("/", createSession);
 router.put("/:id", updateSession);
 router.delete("/:id", deleteSession);
+
+router.use(authMiddleware);
+
+router.get("/", getSession);
 
 export default router;

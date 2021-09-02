@@ -3,10 +3,10 @@ import Table from "../models/table.model.js";
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-export const getSessions = async (req, res) => {
+export const getSession = async (req, res) => {
   try {
-    const allSessions = await Session.find();
-    res.status(200).json(allSessions);
+    const userSession = await Session.findById(req.session);
+    res.status(200).json(userSession);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
