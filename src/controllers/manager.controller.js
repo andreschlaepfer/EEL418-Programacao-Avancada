@@ -29,6 +29,8 @@ export const createManager = async (req, res) => {
 
     const newManager = new Manager({ name, password_hash, restaurant });
     await newManager.save();
+    restaurant.managers.push(newManager);
+    await restaurant.save();
     res.status(201).json(newManager);
   } catch (error) {
     res.status(409).json({ message: error.message });
@@ -53,7 +55,10 @@ export const deleteManagers = async (req, res) => {
 
 export const signIn = async (req, res) => {
   const { name, password } = req.body;
-  const manager = await Manager.findOne({ name }).populate("restaurant");
+  const manager = await Manager.findOne({ name }).populate(
+    "restaurant",
+    "name"
+  );
 
   if (!(await bcrypt.compare(password, manager.password_hash)))
     return res.status(403).json({ error: "Invalid credentials." });
