@@ -25,6 +25,7 @@ const restaurantSchema = new Schema(
     address: addressSchema,
     menuItems: [{ type: Schema.Types.ObjectId, ref: "Item" }],
     tables: [{ type: Schema.Types.ObjectId, ref: "Table" }],
+    managers: [{type: Schema.Types.ObjectId, ref: "Manager"}]
   },
   {
     timestamps: true,
