@@ -54,7 +54,7 @@ export const signIn = async (req, res) => {
   const { name, password } = req.body;
   const manager = await Manager.findOne({ name });
 
-  if (!(await bcrypt.compare(password, manager.password)))
+  if (!(await bcrypt.compare(password, manager.password_hash)))
     return res.status(403).json({ error: "Invalid credentials." });
 
   return res.json({
