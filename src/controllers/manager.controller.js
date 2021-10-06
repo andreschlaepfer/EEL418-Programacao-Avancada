@@ -55,16 +55,17 @@ export const deleteManagers = async (req, res) => {
 
 export const signIn = async (req, res) => {
   const { name, password } = req.body;
-  const manager = await Manager.findOne({ name }).populate(
-    "restaurant",
-    "name"
-  );
+  const manager = await Manager.findOne({ name })
+    .populate("restaurant", "name")
+    .lean();
 
   if (!(await bcrypt.compare(password, manager.password_hash)))
     return res.status(403).json({ error: "Invalid credentials." });
 
+  delete manager.password_hash;
+
   return res.json({
-    restaurant: manager.restaurant,
+    ...manager,
     token: jwt.sign({ id: manager.id }, process.env.SECRET, {
       expiresIn: "5d",
     }),
