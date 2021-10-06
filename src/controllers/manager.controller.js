@@ -1,4 +1,5 @@
 import Manager from "../models/manager.model.js";
+import Restaurant from "../models/restaurant.model.js";
 import bcrypt from "bcryptjs";
 
 export const getManagers = async (req, res) => {
