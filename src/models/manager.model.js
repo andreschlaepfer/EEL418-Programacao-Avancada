@@ -11,20 +11,13 @@ const managerSchema = new Schema(
       trim: true,
       minlength: 2,
     },
-    password: {
+    password_hash: {
       type: String,
       require: true,
       trim: true,
       minlength: 6,
-
-    },
-    cellnumber: {
-      type: String,
-      require: false,
-      unique: true,
     },
     restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant" },
-    
   },
   {
     timestamps: true,

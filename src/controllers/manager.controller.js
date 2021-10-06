@@ -17,15 +17,15 @@ export const getManagers = async (req, res) => {
 
 export const createManager = async (req, res) => {
   try {
-    const { name, cellnumber, password_raw, restaurant_id } = req.body;
+    const { name, password, restaurant_id } = req.body;
     const restaurant = await Restaurant.findById(restaurant_id);
 
-    const password = await bcrypt.hash(password_raw, 8);
+    const password_hash = await bcrypt.hash(password, 8);
 
     if (!restaurant)
       return res.status(404).json({ error: "Restaurant not found." });
 
-    const newManager = new User({ username, cellnumber, password, restaurant });
+    const newManager = new Manager({ name, password_hash, restaurant });
     await newManager.save();
     res.status(201).json(newManager);
   } catch (error) {

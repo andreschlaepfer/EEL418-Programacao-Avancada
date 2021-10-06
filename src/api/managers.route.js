@@ -5,7 +5,7 @@ import {
   updateManager,
   deleteManagers,
   signIn,
-} from "../controllers/Manager.controller.js";
+} from "../controllers/manager.controller.js";
 //import Manager from '../models/Manager.model.js'
 const router = express.Router();
 
