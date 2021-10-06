@@ -17,7 +17,7 @@ export const getManagers = async (req, res) => {
 
 export const createManager = async (req, res) => {
   try {
-    const {name, cellnumber, password_raw, restaurant_id} = req.body;
+    const { name, cellnumber, password_raw, restaurant_id } = req.body;
     const restaurant = await Restaurant.findById(restaurant_id);
 
     const password = await bcrypt.hash(password_raw, 8);
@@ -25,7 +25,7 @@ export const createManager = async (req, res) => {
     if (!restaurant)
       return res.status(404).json({ error: "Restaurant not found." });
 
-    const newManager = new User({ username, cellnumber, password, restaurant});
+    const newManager = new User({ username, cellnumber, password, restaurant });
     await newManager.save();
     res.status(201).json(newManager);
   } catch (error) {
@@ -47,4 +47,19 @@ export const deleteManagers = async (req, res) => {
       res.status(400).json(error)
     )
   );
+};
+
+export const signIn = async (req, res) => {
+  const { name, password } = req.body;
+  const manager = await Manager.findOne({ name });
+
+  if (!(await bcrypt.compare(password, manager.password)))
+    return res.status(403).json({ error: "Invalid credentials." });
+
+  return res.json({
+    restaurant: manager.restaurant,
+    token: jwt.sign({ id: manager.id }, process.env.SECRET, {
+      expiresIn: "5d",
+    }),
+  });
 };
