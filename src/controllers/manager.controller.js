@@ -53,7 +53,7 @@ export const deleteManagers = async (req, res) => {
 
 export const signIn = async (req, res) => {
   const { name, password } = req.body;
-  const manager = await Manager.findOne({ name });
+  const manager = await Manager.findOne({ name }).populate("restaurant");
 
   if (!(await bcrypt.compare(password, manager.password_hash)))
     return res.status(403).json({ error: "Invalid credentials." });
