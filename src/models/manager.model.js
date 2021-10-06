@@ -9,7 +9,7 @@ const managerSchema = new Schema(
       require: true,
       unique: false,
       trim: true,
-      minlength: 3,
+      minlength: 2,
     },
     password: {
       type: String,
