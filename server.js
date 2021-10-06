@@ -8,6 +8,7 @@ import usersRouter from "./src/api/users.route.js";
 import ordersRouter from "./src/api/orders.route.js";
 import sessionsRouter from "./src/api/sessions.route.js";
 import tablesRouter from "./src/api/tables.route.js";
+import managersRouter from "./src/api/managers.route.js";
 import authMiddleware from "./src/middlewares/auth.js";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/v1/items", itemsRouter);
 app.use("/api/v1/orders", ordersRouter);
 app.use("/api/v1/restaurants", restaurantsRouter);
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/managers", managersRouter);
 app.use("*", (req, res) => res.status(404).json({ error: "Not found" }));
 
 export default app;
